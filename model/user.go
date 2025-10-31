@@ -5,6 +5,7 @@ import (
 )
 
 type User struct {
+	ID        NodeID
 	Name      string
 	Platform  string
 	Handle    string
