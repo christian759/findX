@@ -1,8 +1,12 @@
 package model
 
+import (
+	"findX/graph"
+)
+
 type Relationship struct {
-	ID       int64
-	UserID   int64
-	TargetID int64
-	Type     RelationshipType
+	From   graph.NodeID
+	To     graph.NodeID
+	Type   graph.RelationshipType
+	Weight int // optional: how strong or frequent the connection is
 }
