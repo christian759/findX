@@ -84,10 +84,11 @@ func (g *SocialGraph) GetRelationships(id model.NodeID) ([]*model.Relationship, 
 	return relationships, nil
 }
 
-// Followers returns all users that follow a given user
+// GetFollowers returns all users that follow a given user
 func (g *SocialGraph) GetFollowers(target model.NodeID) []*model.User {
 	g.mu.RLock()
 	defer g.mu.RUnlock()
+
 	var followers []*model.User
 	for from, rels := range g.edges {
 		for _, rel := range rels {
@@ -99,4 +100,20 @@ func (g *SocialGraph) GetFollowers(target model.NodeID) []*model.User {
 		}
 	}
 	return followers
+}
+
+// GetFollowing returns all users the given user follows
+func (g *SocialGraph) GetFollowing(user model.NodeID) []*model.User {
+	g.mu.RLock()
+	defer g.mu.RUnlock()
+
+	var following []*model.User
+	for _, rel := range g.edges[user] {
+		if rel.Type == Following {
+			if u, ok := g.nodes[rel.To]; ok {
+				following = append(following, u)
+			}
+		}
+	}
+	return following
 }
