@@ -14,5 +14,4 @@ type User struct {
 	Followers int
 	Following int
 	CreatedAt time.Time
-	// add GraphRelation []Relation
 }
