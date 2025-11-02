@@ -67,7 +67,7 @@ func (s *Scraper) GetUserData(username string, g *graph.SocialGraph) error {
 				Platform: "X",
 			}
 			g.AddUser(fUser)
-			g.AddRelationship(fUser.ID, mainUser.ID, model.Follows, 1)
+			g.AddRelationship(fUser.ID, mainUser.ID, graph.Followers, 1)
 		}
 		log.Printf("👥 Followers scraped: %d", len(followers))
 	}
@@ -83,7 +83,7 @@ func (s *Scraper) GetUserData(username string, g *graph.SocialGraph) error {
 				Platform: "X",
 			}
 			g.AddUser(fUser)
-			g.AddRelationship(mainUser.ID, fUser.ID, model.Follows, 1)
+			g.AddRelationship(mainUser.ID, fUser.ID, graph.Following, 1)
 		}
 		log.Printf("➡️ Following scraped: %d", len(following))
 	}
