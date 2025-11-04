@@ -19,5 +19,4 @@ func x_scrape() {
 		log.Fatal(err)
 	}
 
-	log.Printf("📊 Total users: %d", len(g.GetAllUsers()))
 }
